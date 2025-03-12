@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <meta property="og:title" content="Piece it Together: Part-Based Concepting with IP-Priors"/>
+    <meta property="og:url" content="https://eladrich.github.io/PiT/"/>
+    <meta property="og:image" content="static/images/og_tag_header_image.png"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+
+
+    <title>Piece it Together</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+          rel="stylesheet">
+    <link rel="icon" href="static/images/og_tag_header_image.png">
+
+    <link rel="stylesheet" href="static/css/bulma.min.css">
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="static/css/index.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+    <script defer src="static/js/fontawesome.all.min.js"></script>
+    <script src="static/js/bulma-carousel.min.js"></script>
+    <script src="static/js/bulma-slider.min.js"></script>
+    <script src="static/js/index.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+</head>
+<body>
+
+
+<section class="publication-header">
+    <div class="hero-body">
+        <div class="container is-max-widescreen">
+            <div class="column has-text-centered">
+                <h1 class="title is-1 publication-title">Piece it Together: Part-Based Concepting with IP-Priors</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="publication-author-block">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column has-text-centered">
+                    <div class="is-size-4 publication-authors">
+                        <span class="author-block"><a href="https://eladrich.github.io/"
+                                                      target="_blank">Elad Richardson</a><sup>1</sup>,</span>
+                        <span class="author-block"><a href="https://github.com/kfirgoldberg" target="_blank">Kfir Goldberg</a><sup>1,2</sup>,</span>
+                        <span class="author-block"><a href="https://yuval-alaluf.github.io/" target="_blank">Yuval Alaluf</a><sup>1</sup>,</span>
+                        <span class="author-block"><a href="https://danielcohenor.com/"
+                                                      target="_blank">Daniel Cohen-Or</a><sup>1</sup></span>
+
+
+                    </div>
+                    <div class="is-size-5 publication-authors">
+                        <span class="author-block"><sup>1</sup>Tel Aviv University,</span>
+                        <span class="author-block"><sup>2</sup>Bria AI</span>
+                    </div>
+                    <div class="column has-text-centered">
+                        <div class="publication-links">
+
+                            <!-- <span class="link-block">
+                              <a href="static/files/paper.pdf" target="_blank"
+                                class="external-link button is-normal is-rounded">
+                                <span class="icon">
+                                  <i class="fas fa-book-reader"></i>
+                                </span>
+                                <span>Paper</span>
+                              </a>
+                            </span>                           -->
+
+                            <span class="link-block">
+                <a href="" target="_blank"
+                   class="external-link button is-normal is-rounded">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+
+                            <span class="link-block">
+                <a href="http://github.com/eladrich/PiT" target="_blank"
+                   class="external-link button is-normal is-rounded">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+              </span>
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="hero">
+    <section class="hero teaser">
+        <div class="container is-max-desktop">
+            <div class="hero-body">
+                <div class="container">
+                    <div class="item">
+                        <div class="column is-centered has-text-justified">
+                            <img src="static/figures/teaser.jpg" alt="teaser image" width="100%"/>
+                            <h2 class="subtitle">
+                                Using a dedicated prior for the target domain, our method, Piece it Together (PiT),
+                                effectively completes missing information by seamlessly integrating given elements into
+                                a coherent composition while adding the necessary missing pieces needed for the complete
+                                concept to reside in the prior domain.
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+<section class="section hero is-light">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Abstract</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        Advanced generative models excel at synthesizing images but often rely on text-based
+                        conditioning. Visual designers, however, often work beyond language, directly drawing
+                        inspiration from existing visual elements. In many cases, these elements represent only
+                        fragments of a potential concept—such as an uniquely structured wing, or a specific
+                        hairstyle—serving as inspiration for the artist to explore how they can come together creatively
+                        into a coherent whole. Recognizing this need, we introduce a generative framework that
+                        seamlessly integrates a partial set of user-provided visual components into a coherent
+                        composition while simultaneously sampling the missing parts needed to generate a plausible and
+                        complete concept. Our approach builds on a strong and underexplored representation space,
+                        extracted from IP-Adapter+, on which we train IP-Prior, a lightweight flow-matching model that
+                        synthesizes coherent compositions based on domain-specific priors, enabling diverse and
+                        context-aware generations. Additionally, we present a LoRA-based fine-tuning strategy that
+                        significantly improves prompt adherence in IP-Adapter+ for a given task, addressing its common
+                        trade-off between reconstruction quality and prompt adherence.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="hero is-small">
+    <div class="hero-body">
+        <div class="container">
+            <h2 class="title has-text-centered">PiT Results</h2>
+            <div id="concept-carousel" class="carousel results-carousel">
+                <div class="column is-centered has-text-centered">
+<!--                    <p style="font-size: 40px; font-family: Bradley Hand, cursive">A New Pet </p>-->
+                    <img src="static/figures/model_results/results_creatures.png" alt="sealrat" width="95%"/>
+                </div>
+                <div class="column is-centered has-text-centered">
+<!--                    <p style="font-size: 40px; font-family: Bradley Hand, cursive"> A New Reptile </p>-->
+                    <img src="static/figures/model_results/results_products.png" alt="suncrest_lizard" width="95%"/>
+                </div>
+                <div class="column is-centered has-text-centered">
+<!--                    <p style="font-size: 40px; font-family: Bradley Hand, cursive"> A New Fruit </p>-->
+                    <img src="static/figures/model_results/results_toys.png" alt="fruit" width="95%"/>
+                </div>
+            </div>
+        </div>
+        <br><br>
+    </div>
+</section>
+
+<section class="section hero is-light">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">The IP-Prior Architecture</h2>
+                <div class="content has-text-justified">
+                </div>
+                <div class="column is-centered has-text-centered">
+                    <img src="static/figures/overview.png" alt="PiT" width="100%"/>
+                </div>
+                <div class="content is-centered has-text-justified">
+                    Given an input image, we extract its semantic components, sample a subset, and encode each
+                    image patch into the IP+ space using a frozen IP-Adapter+.
+                    The image embeddings are then passed together through our IP-Prior model. The IP-Prior model
+                    outputs a cleaned image embedding that captures the intended concept, from which we generate the
+                    concept image with SDXL.
+                    <br>
+                    At inference time, users can provide a varying number of object-part images to generate a new concept that aligns with the learned distribution.
+                    <br>
+                </div>
+                <h3 class="title is-4">Generated Data Samples</h3>
+                <div class="column is-centered has-text-centered">
+                    <img src="static/figures/training_data.png" alt="PiT" width="80%"/>
+                </div>
+                <p class="content has-text-centered">
+                    Sample images generated using FLUX-Schnell, which are used to train our IP-Prior model.
+                </p>
+            </div>
+        </div>
+        </p>
+    </div>
+</section>
+
+
+<section class="section hero">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">The IP+ Space</h2>
+                <p class="content has-text-justified">
+                    The CLIP space is well suited for semantic manipulations but limited in its ability to preserve
+                    complex concepts, resulting in a loss of details.
+                    This intuitively stems from the fact that CLIP was never trained to reconstruct images but rather to
+                    learn a joint representation space for text and images. While this encourages a semantic
+                    representation, it does not require the representation to encode visual details that cannot be
+                    easily described through text.
+                    <br>
+                    To improve on this, we explore alternative spaces and ultimately converge on the internal
+                    representation of IP-Adapter+. Using this IP+ space not only results in improved reconstructions but
+                    also retains the ability to perform semantic manipulations and thus can serve as an effective
+                    representation for visual concepts.
+                </p>
+                <div class="content has-text-justified">
+                </div>
+                <h3 class="title is-4">Semantic Manipulations in the IP+ Space</h3>
+                <div class="column is-centered has-text-centered">
+                    <img src="static/figures/clip_interpolate.png" alt="PiT" width="100%"/>
+                </div>
+                <p class="content has-text-justified">
+                    We encode the input image (left) into two different embedding spaces, modify its latent
+                    representation by traversing each space, and render the edited image using SDXL. As shown, CLIP
+                    struggles to both reconstruct the concept and follow the desired edit, whereas in IP+ space, the
+                    rendered images are faithful both to the concept and the desired edit across the entire range.
+                </p>
+                <h3 class="title is-4">Additional Examples</h3>
+                <div class="column is-centered has-text-centered">
+                    <img src="static/figures/interpolate_more.png" alt="PiT" width="100%"/>
+                </div>
+            </div>
+        </div>
+        </p>
+    </div>
+</section>
+
+<section class="section hero is-light">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Recovering Text Adherence with IP-LoRA</h2>
+                <div class="content has-text-justified">
+                </div>
+                <div class="column is-centered has-text-centered">
+                    <img src="static/figures/ip_lora.png" alt="PiT" width="100%"/>
+                </div>
+                <p class="content has-text-justified">
+                    IP-Adapter+ enables rendering generated concepts via SDXL but often struggles with text adherence.
+                    To address this, we fine-tune a LoRA adapter over paired examples, where the conditioning image has
+                    a clean background and the target image places the object in a scene described using a text prompt.
+                    This lightweight training (using just 50 prompts) effectively restores text control while
+                    maintaining visual fidelity.
+                </p>
+                <h3 class="title is-4">Styled Generation</h3>
+                <div class="column is-centered has-text-centered">
+                    <img src="static/figures/styled_result_1.png" alt="PiT" width="100%"/>
+                    <img src="static/figures/styled_result_2.png" alt="PiT" width="100%"/>
+                </div>
+                <p class="content has-text-centered">
+                    The same tuning mechanism can be used to force a specific style on the outputs of the SDXL model when conditioned with the same concept embedding inputs.
+                </p>
+            </div>
+        </div>
+        </p>
+    </div>
+</section>
+
+
+<footer class="footer">
+    <div class="columns is-centered">
+        <div class="column is-8">
+            <div class="content">
+                <p>
+                    This website is licensed under a <a rel="license"
+                                                        href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                    Commons Attribution-ShareAlike 4.0 International License</a>.
+                </p>
+                <p>
+                    Website source code based on the <a href="https://nerfies.github.io/"> Nerfies</a> project page.
+                    If you want to reuse their <a href="https://github.com/nerfies/nerfies.github.io">source code</a>,
+                    please credit them appropriately.
+                </p>
+            </div>
+        </div>
+    </div>
+    </div>
+</footer>
+
+</body>
+</html>
