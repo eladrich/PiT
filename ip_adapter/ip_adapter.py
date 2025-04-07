@@ -48,16 +48,17 @@ class ImageProjModel(torch.nn.Module):
 
 class MLPProjModel(torch.nn.Module):
     """SD model with image prompt"""
+
     def __init__(self, cross_attention_dim=1024, clip_embeddings_dim=1024):
         super().__init__()
-        
+
         self.proj = torch.nn.Sequential(
             torch.nn.Linear(clip_embeddings_dim, clip_embeddings_dim),
             torch.nn.GELU(),
             torch.nn.Linear(clip_embeddings_dim, cross_attention_dim),
-            torch.nn.LayerNorm(cross_attention_dim)
+            torch.nn.LayerNorm(cross_attention_dim),
         )
-        
+
     def forward(self, image_embeds):
         clip_extra_context_tokens = self.proj(image_embeds)
         return clip_extra_context_tokens
@@ -74,9 +75,10 @@ class IPAdapter:
         self.set_ip_adapter()
 
         # load image encoder
-        self.image_encoder = CLIPVisionModelWithProjection.from_pretrained("h94/IP-Adapter", subfolder="models/image_encoder").to(
-            self.device, dtype=torch.float16
-        )
+        # self.image_encoder = CLIPVisionModelWithProjection.from_pretrained("h94/IP-Adapter", subfolder="models/image_encoder").to(
+        self.image_encoder = CLIPVisionModelWithProjection.from_pretrained(
+            "h94/IP-Adapter", subfolder=image_encoder_path
+        ).to(self.device, dtype=torch.float16)
         self.clip_image_processor = CLIPImageProcessor()
         # image proj model
         self.image_proj_model = self.init_proj()
@@ -237,11 +239,15 @@ class IPAdapterXL(IPAdapter):
         num_samples=4,
         seed=None,
         num_inference_steps=30,
+        image_prompt_embeds=None,
         **kwargs,
     ):
         self.set_scale(scale)
 
-        num_prompts = 1 if isinstance(pil_image, Image.Image) else len(pil_image)
+        if pil_image is not None:
+            num_prompts = 1 if isinstance(pil_image, Image.Image) else len(pil_image)
+        else:
+            num_prompts = 1
 
         if prompt is None:
             prompt = "best quality, high quality"
@@ -253,7 +259,16 @@ class IPAdapterXL(IPAdapter):
         if not isinstance(negative_prompt, List):
             negative_prompt = [negative_prompt] * num_prompts
 
-        image_prompt_embeds, uncond_image_prompt_embeds = self.get_image_embeds(pil_image)
+        if pil_image is None:
+            assert image_prompt_embeds is not None
+            clip_image = self.clip_image_processor(
+                images=[Image.new("RGB", (128, 128))], return_tensors="pt"
+            ).pixel_values
+            clip_image = clip_image.to(self.device, dtype=torch.float16)
+            uncond_clip_image_embeds = self.image_encoder(torch.zeros_like(clip_image)).image_embeds
+            uncond_image_prompt_embeds = self.image_proj_model(uncond_clip_image_embeds)
+        else:
+            image_prompt_embeds, uncond_image_prompt_embeds = self.get_image_embeds(pil_image)
         bs_embed, seq_len, _ = image_prompt_embeds.shape
         image_prompt_embeds = image_prompt_embeds.repeat(1, num_samples, 1)
         image_prompt_embeds = image_prompt_embeds.view(bs_embed * num_samples, seq_len, -1)
@@ -276,7 +291,7 @@ class IPAdapterXL(IPAdapter):
             negative_prompt_embeds = torch.cat([negative_prompt_embeds, uncond_image_prompt_embeds], dim=1)
 
         self.generator = get_generator(seed, self.device)
-        
+
         images = self.pipe(
             prompt_embeds=prompt_embeds,
             negative_prompt_embeds=negative_prompt_embeds,
@@ -389,7 +404,7 @@ class IPAdapterPlusXL(IPAdapter):
     ):
         self.set_scale(scale)
 
-        num_prompts = 1 # if isinstance(pil_image, Image.Image) else len(pil_image)
+        num_prompts = 1  # if isinstance(pil_image, Image.Image) else len(pil_image)
 
         if prompt is None:
             prompt = "best quality, high quality"
