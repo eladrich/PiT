@@ -1,0 +1,1 @@
+huggingface-cli download kfirgold99/Piece-it-Together --repo-type model --include "ip_space_edit_directions/*" --local-dir  ./weights/

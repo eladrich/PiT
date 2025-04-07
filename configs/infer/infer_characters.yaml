@@ -1,0 +1,4 @@
+prior_path: models/characters_ckpt/prior.ckpt
+prior_repo: kfirgold99/Piece-it-Together
+crops_dir: assets/characters_parts
+output_dir: inference/characters

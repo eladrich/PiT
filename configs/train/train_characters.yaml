@@ -1,0 +1,9 @@
+dataset_path: 'datasets/generated/characters'
+val_dataset_path: 'datasets/generated/characters'
+output_dir: 'training_results/train_characters'
+train_batch_size: 64
+num_layers: 4
+max_crops: 7
+
+
+

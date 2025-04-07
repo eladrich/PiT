@@ -1,0 +1,4 @@
+prior_path: models/products_ckpt/prior.ckpt
+prior_repo: kfirgold99/Piece-it-Together
+crops_dir: assets/product_parts
+output_dir: inference/products
