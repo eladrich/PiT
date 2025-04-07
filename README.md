@@ -47,8 +47,8 @@ Official implementation of the paper "Piece it Together: Part-Based Concepting w
 1. Clone the repo:
 
 ```bash
-git clone <>
-cd <>
+git clone https://github.com/eladrich/PiT
+cd PiT
 ```
 
 2. Install `uv`:
