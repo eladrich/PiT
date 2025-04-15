@@ -30,11 +30,11 @@ with gr.Blocks(css="style.css") as demo:
     )
     with gr.Row(equal_height=True, elem_classes="justified-element"):
         with gr.Column(scale=0, min_width=BLOCK_WIDTH):
-            part_1 = gr.Image(label="Upload part 1", type="filepath", width=BLOCK_WIDTH, height=BLOCK_HEIGHT)
+            part_1 = gr.Image(label="Upload part 1 (or keep empty)", type="filepath", width=BLOCK_WIDTH, height=BLOCK_HEIGHT)
         with gr.Column(scale=0, min_width=BLOCK_WIDTH):
-            part_2 = gr.Image(label="Upload part 2", type="filepath", width=BLOCK_WIDTH, height=BLOCK_HEIGHT)
+            part_2 = gr.Image(label="Upload part 2 (or keep empty)", type="filepath", width=BLOCK_WIDTH, height=BLOCK_HEIGHT)
         with gr.Column(scale=0, min_width=BLOCK_WIDTH):
-            part_3 = gr.Image(label="Upload part 3", type="filepath", width=BLOCK_WIDTH, height=BLOCK_HEIGHT)
+            part_3 = gr.Image(label="Upload part 3 (or keep empty)", type="filepath", width=BLOCK_WIDTH, height=BLOCK_HEIGHT)
         with gr.Column(scale=0, min_width=BLOCK_WIDTH):
             output_eq_1 = gr.Image(label="Output", width=BLOCK_WIDTH, height=BLOCK_HEIGHT)
     with gr.Row(equal_height=True, elem_classes="justified-element"):
